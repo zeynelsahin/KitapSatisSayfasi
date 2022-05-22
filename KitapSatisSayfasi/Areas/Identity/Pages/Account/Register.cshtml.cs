@@ -47,6 +47,18 @@ namespace KitapSatisSayfasi.Areas.Identity.Pages.Account
         public class InputModel
         {
             [Required]
+            [Display(Name = "Ad")]
+            public string Ad { get; set; }
+            
+            [Required]
+            [Display(Name = "Soyad")]
+            public string Soyad { get; set; }
+            
+            [Required]
+            [Display(Name = "Mahlas")]
+            public string Mahlas { get; set; }
+            
+            [Required]
             [EmailAddress]
             [Display(Name = "Email")]
             public string Email { get; set; }
@@ -61,6 +73,10 @@ namespace KitapSatisSayfasi.Areas.Identity.Pages.Account
             [Display(Name = "Confirm password")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
+            
+            [Required]
+            [Display(Name = "Adres")]
+            public string Adres { get; set; }
         }
 
         public async Task OnGetAsync(string returnUrl = null)
@@ -75,22 +91,30 @@ namespace KitapSatisSayfasi.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
-                var user = new Uye { UserName = Input.Email, Email = Input.Email };
+                var user = new Uye { Ad = Input.Ad,Soyad = Input.Soyad,UserName = Input.Mahlas, Email = Input.Email,Adres = Input.Adres};
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");
 
-                    var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-                    code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
-                    var callbackUrl = Url.Page(
-                        "/Account/ConfirmEmail",
-                        pageHandler: null,
-                        values: new { area = "Identity", userId = user.Id, code = code, returnUrl = returnUrl },
-                        protocol: Request.Scheme);
-
-                    await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
-                        $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+                    if (Input.Mahlas=="Admin")
+                    {
+                        await _userManager.AddToRoleAsync(user, "Admin");
+                    }
+                    else
+                    {
+                        await _userManager.AddToRoleAsync(user, "Uye");
+                    }
+                    // var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                    // code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
+                    // var callbackUrl = Url.Page(
+                    //     "/Account/ConfirmEmail",
+                    //     pageHandler: null,
+                    //     values: new { area = "Identity", userId = user.Id, code = code, returnUrl = returnUrl },
+                    //     protocol: Request.Scheme);
+                    //
+                    // await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
+                    //     $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
 
                     if (_userManager.Options.SignIn.RequireConfirmedAccount)
                     {

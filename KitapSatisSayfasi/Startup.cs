@@ -34,7 +34,7 @@ namespace KitapSatisSayfasi
                     Configuration.GetConnectionString("DefaultConnection")));
             services.AddDatabaseDeveloperPageExceptionFilter();
 
-            services.AddIdentity<Uye, Rol>(options => options.SignIn.RequireConfirmedAccount = true)
+            services.AddIdentity<Uye, Rol>(options => options.SignIn.RequireConfirmedAccount = false)
                 .AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultUI();
             //services.AddMvc();//en son eklendi 
             //services.AddDefaultIdentity<Uye>(options => options.SignIn.RequireConfirmedAccount = true)
@@ -66,6 +66,21 @@ namespace KitapSatisSayfasi
             app.UseAuthentication();
             app.UseAuthorization();
 
+           
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllerRoute(
+                    name: "Admin",
+                    pattern: "{area:exists}/{controller=Home}/{action=index}/{id?}");
+                endpoints.MapRazorPages();
+            });
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllerRoute(
+                    name: "Uyeler",
+                    pattern: "{area:exists}/{controller=Home}/{action=index}/{id?}");
+                endpoints.MapRazorPages();
+            });
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
