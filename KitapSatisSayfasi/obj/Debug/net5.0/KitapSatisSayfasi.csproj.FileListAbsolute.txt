@@ -299,7 +299,6 @@ C:\Users\zynls\Masaüstü\Kurs\KitapSatisSayfasi\KitapSatisSayfasi\obj\Debug\net
 C:\Users\zynls\Masaüstü\Kurs\KitapSatisSayfasi\KitapSatisSayfasi\obj\Debug\net5.0\KitapSatisSayfasi.TagHelpers.input.cache
 C:\Users\zynls\Masaüstü\Kurs\KitapSatisSayfasi\KitapSatisSayfasi\obj\Debug\net5.0\KitapSatisSayfasi.TagHelpers.output.cache
 C:\Users\zynls\Masaüstü\Kurs\KitapSatisSayfasi\KitapSatisSayfasi\obj\Debug\net5.0\KitapSatisSayfasi.RazorCoreGenerate.cache
-C:\Users\zynls\Masaüstü\Kurs\KitapSatisSayfasi\KitapSatisSayfasi\obj\Debug\net5.0\Razor\Areas\Identity\Pages\_ViewStart.cshtml.g.cs
 C:\Users\zynls\Masaüstü\Kurs\KitapSatisSayfasi\KitapSatisSayfasi\obj\Debug\net5.0\Razor\Views\Home\Index.cshtml.g.cs
 C:\Users\zynls\Masaüstü\Kurs\KitapSatisSayfasi\KitapSatisSayfasi\obj\Debug\net5.0\Razor\Views\Home\Privacy.cshtml.g.cs
 C:\Users\zynls\Masaüstü\Kurs\KitapSatisSayfasi\KitapSatisSayfasi\obj\Debug\net5.0\Razor\Views\Kitap\Index.cshtml.g.cs
